@@ -1,13 +1,11 @@
 package br.com.rodrigo.forum.controller
 
+import br.com.rodrigo.forum.dto.TopicoDto
 import br.com.rodrigo.forum.model.Topico
 import br.com.rodrigo.forum.services.TopicoService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/topicos")
@@ -27,5 +25,11 @@ class TopicoController(private val service: TopicoService) {
         } else {
             ResponseEntity<Topico>(topico, HttpStatus.OK)
         }
+    }
+
+    @PostMapping
+    fun cadastrar(@RequestBody dto: TopicoDto): ResponseEntity<Void> {
+        service.cadastrar(dto)
+        return ResponseEntity<Void>(HttpStatus.OK)
     }
 }

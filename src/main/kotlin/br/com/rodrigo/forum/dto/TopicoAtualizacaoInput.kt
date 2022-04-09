@@ -4,7 +4,10 @@ import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
 
-data class TopicoInput(
+data class TopicoAtualizacaoInput(
+    @NotNull
+    val id: String,
+
     @field:NotEmpty(message = "Campo obrigatório")
     @field:Size(min = 1, max = 255)
     val titulo: String,
@@ -13,9 +16,4 @@ data class TopicoInput(
     @field:Size(min = 1, max = 5000)
     val mensagem: String,
 
-    @field:NotNull
-    val idCurso: Long,
-
-    @field:NotNull
-    val idAutor: Long
-)
+    )

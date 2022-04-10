@@ -2,25 +2,34 @@ package br.com.rodrigo.forum.services
 
 import br.com.rodrigo.forum.dto.TopicoAtualizacaoInput
 import br.com.rodrigo.forum.dto.TopicoCadastroInput
+import br.com.rodrigo.forum.dto.TopicoPorCategoriaDto
 import br.com.rodrigo.forum.dto.response.TopicoResponse
 import br.com.rodrigo.forum.mappers.TopicoInputMapper
 import br.com.rodrigo.forum.mappers.TopicoResponseMapper
-import br.com.rodrigo.forum.model.Topico
+import br.com.rodrigo.forum.repository.TopicoRepository
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 @Service
 class TopicoService(
-    private var topicos: MutableList<Topico> = ArrayList(),
+    private val repository: TopicoRepository,
     private val topicoResponseMapper: TopicoResponseMapper,
     private val topicoInputMapper: TopicoInputMapper
 ) {
 
 
-    fun listar(): List<TopicoResponse> = topicos.toList().stream()
-        .map { t -> topicoResponseMapper.map(t) }
-        .toList()
+    fun listar(nomeCurso: String?, paginacao: Pageable): Page<TopicoResponse> {
+        val topicos = if (nomeCurso == null) {
+            repository.findAll(paginacao)
+        } else {
+            repository.findByCursoNome(nomeCurso, paginacao)
+        }
 
-    fun buscarPorId(id: String): TopicoResponse? {
+        return topicos.map { t -> topicoResponseMapper.map(t) }
+    }
+
+    fun buscarPorId(id: Long): TopicoResponse? {
         val topico = recuperarTopico(id)
 
         return if (topico != null) {
@@ -32,34 +41,31 @@ class TopicoService(
 
     fun cadastrar(dto: TopicoCadastroInput): TopicoResponse? {
         val novoTopico = topicoInputMapper.map(dto)
-        topicos.add(novoTopico)
-        return buscarPorId(novoTopico.id)
+        repository.save(novoTopico)
+        return topicoResponseMapper.map(novoTopico)
     }
 
     fun atualizar(dto: TopicoAtualizacaoInput): TopicoResponse? {
         var topico = recuperarTopico(dto.id)
 
         return if (topico != null) {
-            deletar(dto.id)
-            cadastrar(TopicoCadastroInput(topico.id, dto.titulo, dto.mensagem, topico.curso.id!!, topico.autor.id!!))
-            buscarPorId(dto.id)
+            topico.titulo = dto.titulo
+            topico.mensagem = dto.mensagem
+
+            topicoResponseMapper.map(topico)
         } else {
             null
         }
     }
 
-    fun deletar(id: String): Boolean {
-        var topico = recuperarTopico(id)
-
-        return if (topico != null) {
-            topicos = topicos.filter { t -> t.id != id }.toMutableList()
-            true
-        } else {
-            false
-        }
+    fun deletar(id: Long) {
+        repository.deleteById(id)
     }
 
-    private fun recuperarTopico(id: String) =
-        topicos.stream().filter { t -> t.id == id }.findFirst().orElse(null)
+    fun relatorio(): List<TopicoPorCategoriaDto> {
+        return repository.relatorio()
+    }
 
+    private fun recuperarTopico(id: Long) =
+        repository.findById(id).orElse(null)
 }

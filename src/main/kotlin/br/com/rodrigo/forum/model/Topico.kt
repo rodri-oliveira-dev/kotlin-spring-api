@@ -1,14 +1,23 @@
 package br.com.rodrigo.forum.model
 
 import java.time.LocalDateTime
+import javax.persistence.*
 
+@Entity
 data class Topico(
-    val id: String,
-    val titulo: String,
-    val mensagem: String,
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long? = null,
+    var titulo: String,
+    var mensagem: String,
     val dataCriacao: LocalDateTime = LocalDateTime.now(),
+
+    @ManyToOne
     val curso: Curso,
+    @ManyToOne
     val autor: Usuario,
+    @Enumerated(value = EnumType.STRING)
     val status: StatusTopico = StatusTopico.NAO_RESPONDIDO,
-    var respostas: List<Resposta> = ArrayList()
+
+    @OneToMany(mappedBy = "topico")
+    var respostas: List<Resposta> = emptyList()
 )

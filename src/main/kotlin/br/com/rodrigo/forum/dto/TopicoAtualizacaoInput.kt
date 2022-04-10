@@ -6,7 +6,7 @@ import javax.validation.constraints.Size
 
 data class TopicoAtualizacaoInput(
     @NotNull
-    val id: String,
+    val id: Long,
 
     @field:NotEmpty(message = "Campo obrigatório")
     @field:Size(min = 1, max = 255)

@@ -1,22 +1,13 @@
 package br.com.rodrigo.forum.services
 
 import br.com.rodrigo.forum.model.Usuario
+import br.com.rodrigo.forum.repository.UsuarioRepository
 import org.springframework.stereotype.Service
 
 @Service
-class UsuarioService(private var usuarios: MutableList<Usuario>) {
-
-    init {
-        val usuario = Usuario(1, "Rodrigo", "rodrigo@mail.com")
-
-        usuarios = arrayListOf(usuario)
-    }
-
-    fun listar(): List<Usuario> {
-        return usuarios.toList()
-    }
+class UsuarioService(private val repository: UsuarioRepository) {
 
     fun buscarPorId(id: Long): Usuario? {
-        return usuarios.stream().filter { t -> t.id == id }.findFirst().orElse(null)
+        return repository.findById(id).orElse(null)
     }
 }

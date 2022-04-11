@@ -9,7 +9,19 @@
 			"name": "Cursos",
 			"item": [
 				{
-					"name": "Cadastrar Curso",
+					"name": "Cadastrar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"curso_id\",jsonData.data.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -40,13 +52,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/cursos/1",
+							"raw": "{{url}}/cursos/{{curso_id}}",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"cursos",
-								"1"
+								"{{curso_id}}"
 							]
 						}
 					},
@@ -70,13 +82,13 @@
 					"response": []
 				},
 				{
-					"name": "Atualizar Curso",
+					"name": "Atualizar",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"nome\": \"Kotlin 2\",\r\n    \"categoria\": \"Programação\"\r\n}",
+							"raw": "{\r\n    \"id\": {{curso_id}},\r\n    \"nome\": \"Kotlin 2\",\r\n    \"categoria\": \"Programação\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -96,18 +108,140 @@
 					"response": []
 				},
 				{
-					"name": "Excluir Curso",
+					"name": "Excluir",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/cursos/1",
+							"raw": "{{url}}/cursos/{{curso_id}}",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"cursos",
-								"1"
+								"{{curso_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuários",
+			"item": [
+				{
+					"name": "Cadastrar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"usuario_id\",jsonData.data.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Rodrigo de Oliveira\",\r\n    \"email\": \"rodrigodotnet@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/usuarios",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Recuperar por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/usuarios/{{usuario_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"usuarios",
+								"{{usuario_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Recuperar todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/usuarios",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": {{usuario_id}},\r\n    \"nome\": \"Rodrigo de Oliveira 1\",\r\n    \"email\": \"rodrigodotnet@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/usuarios",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/usuarios/{{usuario_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"usuarios",
+								"{{usuario_id}}"
 							]
 						}
 					},
@@ -119,15 +253,14 @@
 			"name": "Topicos",
 			"item": [
 				{
-					"name": "Cadastrar Topico",
+					"name": "Cadastrar",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);\r",
-									"pm.environment.set(\"topico_id\",jsonData.data.id);\r",
-									""
+									"pm.environment.set(\"topico_id\",jsonData.data.id);"
 								],
 								"type": "text/javascript"
 							}
@@ -138,7 +271,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"titulo\": \"Topico 3\",\r\n    \"mensagem\": \"Terceiro topico\",\r\n    \"idCurso\": 1,\r\n    \"idAutor\": 1\r\n}",
+							"raw": "{\r\n    \"titulo\": \"Topico 1\",\r\n    \"mensagem\": \"Primeiro topico\",\r\n    \"idCurso\": {{curso_id}},\r\n    \"idAutor\": {{usuario_id}}\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -315,7 +448,7 @@
 					]
 				},
 				{
-					"name": "Atualizar Topico",
+					"name": "Atualizar",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -373,7 +506,7 @@
 					]
 				},
 				{
-					"name": "Excluir Topico",
+					"name": "Excluir",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -391,7 +524,7 @@
 					"response": []
 				},
 				{
-					"name": "relatorio",
+					"name": "Relatorio",
 					"request": {
 						"method": "GET",
 						"header": [],

@@ -6,6 +6,116 @@
 	},
 	"item": [
 		{
+			"name": "Cursos",
+			"item": [
+				{
+					"name": "Cadastrar Curso",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Kotlin\",\r\n    \"categoria\": \"Programação\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/cursos",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cursos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Recupera por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/cursos/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cursos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Recupera todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/cursos",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cursos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Curso",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"nome\": \"Kotlin 2\",\r\n    \"categoria\": \"Programação\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/cursos",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cursos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Curso",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/cursos/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cursos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Topicos",
 			"item": [
 				{
@@ -28,7 +138,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"titulo\": \"Topico 3\",\r\n    \"mensagem\": \"Terceiro topico\",\r\n    \"idCurso\":1,\r\n    \"idAutor\": 1\r\n}",
+							"raw": "{\r\n    \"titulo\": \"Topico 3\",\r\n    \"mensagem\": \"Terceiro topico\",\r\n    \"idCurso\": 1,\r\n    \"idAutor\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -91,6 +201,26 @@
 							],
 							"path": [
 								"topicos"
+							],
+							"query": [
+								{
+									"key": "nomeCurso",
+									"value": "Kotlin",
+									"description": "Nome Curso",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "2",
+									"description": "Total de itens na pagina",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Pagina alvo",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -255,6 +385,24 @@
 							"path": [
 								"topicos",
 								"{{topico_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "relatorio",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/topicos/relatorio",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"topicos",
+								"relatorio"
 							]
 						}
 					},

@@ -4,8 +4,8 @@ import br.com.rodrigo.forum.dto.TopicoAtualizacaoInput
 import br.com.rodrigo.forum.dto.TopicoCadastroInput
 import br.com.rodrigo.forum.dto.TopicoPorCategoriaDto
 import br.com.rodrigo.forum.dto.response.TopicoResponse
-import br.com.rodrigo.forum.mappers.TopicoInputMapper
-import br.com.rodrigo.forum.mappers.TopicoResponseMapper
+import br.com.rodrigo.forum.mappers.ExtensionMapper
+import br.com.rodrigo.forum.mappers.toTopicoResponse
 import br.com.rodrigo.forum.repository.TopicoRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -14,8 +14,7 @@ import org.springframework.stereotype.Service
 @Service
 class TopicoService(
     private val repository: TopicoRepository,
-    private val topicoResponseMapper: TopicoResponseMapper,
-    private val topicoInputMapper: TopicoInputMapper
+    private val topicoInputMapper: ExtensionMapper
 ) {
 
 
@@ -26,14 +25,14 @@ class TopicoService(
             repository.findByCursoNome(nomeCurso, paginacao)
         }
 
-        return topicos.map { t -> topicoResponseMapper.map(t) }
+        return topicos.map { t -> t.toTopicoResponse() }
     }
 
     fun buscarPorId(id: Long): TopicoResponse? {
         val topico = recuperarTopico(id)
 
         return if (topico != null) {
-            topicoResponseMapper.map(topico)
+            topico.toTopicoResponse()
         } else {
             null
         }
@@ -42,7 +41,7 @@ class TopicoService(
     fun cadastrar(dto: TopicoCadastroInput): TopicoResponse? {
         val novoTopico = topicoInputMapper.map(dto)
         repository.save(novoTopico)
-        return topicoResponseMapper.map(novoTopico)
+        return novoTopico.toTopicoResponse()
     }
 
     fun atualizar(dto: TopicoAtualizacaoInput): TopicoResponse? {
@@ -52,7 +51,7 @@ class TopicoService(
             topico.titulo = dto.titulo
             topico.mensagem = dto.mensagem
 
-            topicoResponseMapper.map(topico)
+            topico.toTopicoResponse()
         } else {
             null
         }

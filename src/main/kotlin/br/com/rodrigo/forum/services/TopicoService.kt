@@ -4,8 +4,9 @@ import br.com.rodrigo.forum.dto.TopicoAtualizacaoInput
 import br.com.rodrigo.forum.dto.TopicoCadastroInput
 import br.com.rodrigo.forum.dto.TopicoPorCategoriaDto
 import br.com.rodrigo.forum.dto.response.TopicoResponse
-import br.com.rodrigo.forum.mappers.ExtensionMapper
+import br.com.rodrigo.forum.mappers.TopicoMapper
 import br.com.rodrigo.forum.mappers.toTopicoResponse
+import br.com.rodrigo.forum.model.Topico
 import br.com.rodrigo.forum.repository.TopicoRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Service
 @Service
 class TopicoService(
     private val repository: TopicoRepository,
-    private val topicoInputMapper: ExtensionMapper
+    private val topicoInputMapper: TopicoMapper
 ) {
 
 
@@ -36,6 +37,10 @@ class TopicoService(
         } else {
             null
         }
+    }
+
+    fun buscarEntidadePorId(id: Long): Topico? {
+        return recuperarTopico(id)
     }
 
     fun cadastrar(dto: TopicoCadastroInput): TopicoResponse? {

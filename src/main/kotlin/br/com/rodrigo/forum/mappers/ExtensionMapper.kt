@@ -13,7 +13,7 @@ class ExtensionMapper(
 ) : Mapper<TopicoCadastroInput, Topico> {
     override fun map(t: TopicoCadastroInput): Topico {
         val curso = cursoService.buscarCursoPorId(t.idCurso)
-        val usuario = usuarioService.buscarPorId(t.idAutor)
+        val usuario = usuarioService.buscarUsuarioPorId(t.idAutor)
 
         return Topico(
             titulo = t.titulo,

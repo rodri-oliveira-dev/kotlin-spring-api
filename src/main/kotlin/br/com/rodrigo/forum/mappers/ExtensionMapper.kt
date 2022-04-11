@@ -7,12 +7,12 @@ import br.com.rodrigo.forum.services.UsuarioService
 import org.springframework.stereotype.Component
 
 @Component
-class TopicoInputMapper(
+class ExtensionMapper(
     private val cursoService: CursoService,
     private val usuarioService: UsuarioService,
 ) : Mapper<TopicoCadastroInput, Topico> {
     override fun map(t: TopicoCadastroInput): Topico {
-        val curso = cursoService.buscarPorId(t.idCurso)
+        val curso = cursoService.buscarCursoPorId(t.idCurso)
         val usuario = usuarioService.buscarPorId(t.idAutor)
 
         return Topico(

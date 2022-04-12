@@ -28,7 +28,7 @@ fun Usuario.toUsuarioResponse(): UsuarioResponse {
 }
 
 fun UsuarioCadastroInput.toUsuario(): Usuario {
-    return Usuario(null, nome, email)
+    return Usuario(null, nome, email, password)
 }
 
 fun Resposta.toRespostaResponse(): RespostaResponse {

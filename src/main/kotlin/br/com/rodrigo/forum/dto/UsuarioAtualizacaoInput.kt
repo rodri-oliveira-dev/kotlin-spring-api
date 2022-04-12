@@ -18,4 +18,6 @@ data class UsuarioAtualizacaoInput(
     @field:Email
     val email: String,
 
-    )
+    val password: String
+
+)

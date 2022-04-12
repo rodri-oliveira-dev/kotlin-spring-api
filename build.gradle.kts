@@ -25,8 +25,10 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.6.6")
     implementation("org.springframework.boot:spring-boot-starter-cache:2.6.6")
+    implementation("org.springframework.boot:spring-boot-starter-security:2.6.6")
     implementation("com.h2database:h2:2.1.210")
     implementation("org.flywaydb:flyway-core:8.5.7")
+    implementation("io.swagger.core.v3:swagger-annotations:2.1.13")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

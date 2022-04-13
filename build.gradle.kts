@@ -29,6 +29,7 @@ dependencies {
     implementation("com.h2database:h2:2.1.210")
     implementation("org.flywaydb:flyway-core:8.5.7")
     implementation("io.swagger.core.v3:swagger-annotations:2.1.13")
+    implementation("io.jsonwebtoken:jjwt:0.9.1")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

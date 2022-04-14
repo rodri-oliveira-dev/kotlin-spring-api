@@ -20,7 +20,7 @@ fun Curso.toCursoResponse(): CursoResponse {
 }
 
 fun Topico.toTopicoResponse(): TopicoResponse {
-    return TopicoResponse(id, titulo, mensagem, status, dataCriacao)
+    return TopicoResponse(id, titulo, mensagem, status, dataCriacao, dataAlteracao)
 }
 
 fun Usuario.toUsuarioResponse(): UsuarioResponse {

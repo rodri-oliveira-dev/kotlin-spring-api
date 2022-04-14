@@ -4,6 +4,6 @@ create table role(
     primary key(id)
 );
 
-INSERT INTO ROLE (id, nome) VALUES (1,'LEITURA_ESCRITA');
-INSERT INTO ROLE (id, nome) VALUES (2,'SOMENTE_LEITURA');
+INSERT INTO role (id, nome) VALUES (1,'LEITURA_ESCRITA');
+INSERT INTO role (id, nome) VALUES (2,'SOMENTE_LEITURA');
 

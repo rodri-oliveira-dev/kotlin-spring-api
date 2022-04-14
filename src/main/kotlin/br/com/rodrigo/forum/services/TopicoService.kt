@@ -11,6 +11,7 @@ import br.com.rodrigo.forum.repository.TopicoRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
+import java.time.LocalDateTime
 
 @Service
 class TopicoService(
@@ -55,6 +56,7 @@ class TopicoService(
         return if (topico != null) {
             topico.titulo = dto.titulo
             topico.mensagem = dto.mensagem
+            topico.dataAlteracao = LocalDateTime.now()
 
             topico.toTopicoResponse()
         } else {

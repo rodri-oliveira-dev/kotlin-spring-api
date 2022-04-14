@@ -11,15 +11,19 @@ import java.util.*
 
 @Component
 class JwtUtil(private val usuarioService: UsuarioService) {
-    private val expiration: Long = 60000
+    private val expiration: Long = 60000 * 5
+    private val secret: String = "mtN8Vj,7MGg&rj6L/D3=L#GDbA:D&28()^Gwdk*QH:dP:9(Y_BCx=9Z"
 
-    private val secret: String = "palavra-chave"
+    fun generateToken(userName: String, authorities: MutableCollection<out GrantedAuthority>, host: String): String? {
+        val currentDateTime = System.currentTimeMillis()
+        val expirationDateTime = currentDateTime + expiration
 
-    fun generateToken(userName: String, authorities: MutableCollection<out GrantedAuthority>): String? {
         return Jwts.builder()
+            .setIssuer(host)
             .setSubject(userName)
             .claim("role", authorities)
-            .setExpiration(Date(System.currentTimeMillis() + expiration))
+            .setIssuedAt(Date(currentDateTime))
+            .setExpiration(Date(expirationDateTime))
             .signWith(SignatureAlgorithm.HS512, secret.toByteArray()).compact()
     }
 

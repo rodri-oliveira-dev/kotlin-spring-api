@@ -7,6 +7,7 @@ import br.com.rodrigo.forum.dto.CursoCadastroInput
 import br.com.rodrigo.forum.dto.response.BaseResponse
 import br.com.rodrigo.forum.dto.response.CursoResponse
 import br.com.rodrigo.forum.services.CursoService
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
@@ -18,7 +19,9 @@ import javax.transaction.Transactional
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/cursos")
+@SecurityRequirement(name = "bearerAuth")
+@RequestMapping("/cursos", produces = ["application/json"], consumes = ["application/json"])
+
 class CursoController(private val service: CursoService) {
 
     @GetMapping

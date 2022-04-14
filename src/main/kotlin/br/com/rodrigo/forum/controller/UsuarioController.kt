@@ -7,6 +7,7 @@ import br.com.rodrigo.forum.dto.UsuarioCadastroInput
 import br.com.rodrigo.forum.dto.response.BaseResponse
 import br.com.rodrigo.forum.dto.response.UsuarioResponse
 import br.com.rodrigo.forum.services.UsuarioService
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
@@ -18,6 +19,7 @@ import javax.transaction.Transactional
 import javax.validation.Valid
 
 @RestController
+@SecurityRequirement(name = "bearerAuth")
 @RequestMapping("/usuarios")
 class UsuarioController(private val service: UsuarioService) {
 

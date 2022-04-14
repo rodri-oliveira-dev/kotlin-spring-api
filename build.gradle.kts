@@ -29,7 +29,7 @@ dependencies {
     implementation("com.h2database:h2:2.1.210")
     implementation("org.flywaydb:flyway-core:8.5.7")
     implementation("org.flywaydb:flyway-mysql:8.5.7")
-    implementation("io.swagger.core.v3:swagger-annotations:2.2.0")
+    implementation("org.springdoc:springdoc-openapi-ui:1.6.7")
     implementation("io.jsonwebtoken:jjwt:0.9.1")
     implementation("mysql:mysql-connector-java:8.0.28")
     developmentOnly("org.springframework.boot:spring-boot-devtools")

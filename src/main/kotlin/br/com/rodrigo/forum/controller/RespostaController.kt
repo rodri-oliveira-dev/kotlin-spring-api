@@ -5,6 +5,7 @@ import br.com.rodrigo.forum.dto.RespostaCadastroInput
 import br.com.rodrigo.forum.dto.response.BaseResponse
 import br.com.rodrigo.forum.dto.response.RespostaResponse
 import br.com.rodrigo.forum.services.RespostaService
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -12,6 +13,7 @@ import javax.transaction.Transactional
 import javax.validation.Valid
 
 @RestController
+@SecurityRequirement(name = "bearerAuth")
 @RequestMapping("/respostas")
 class RespostaController(private val service: RespostaService) {
 

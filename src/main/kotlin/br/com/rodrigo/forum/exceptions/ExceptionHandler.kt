@@ -1,6 +1,7 @@
 package br.com.rodrigo.forum.exceptions
 
 import br.com.rodrigo.forum.dto.ErrorView
+import io.jsonwebtoken.ExpiredJwtException
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -25,6 +26,21 @@ class ExceptionHandler {
             status = HttpStatus.BAD_REQUEST.value(),
             error = HttpStatus.BAD_REQUEST.name,
             message = errorMessage.toString(),
+            path = request.servletPath
+        )
+    }
+
+    @ExceptionHandler(ExpiredJwtException::class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    fun handleValidationError(
+        exception: ExpiredJwtException,
+        request: HttpServletRequest
+    ): ErrorView {
+
+        return ErrorView(
+            status = HttpStatus.BAD_REQUEST.value(),
+            error = HttpStatus.BAD_REQUEST.name,
+            message = "errorMessage.toString()",
             path = request.servletPath
         )
     }

@@ -10,4 +10,10 @@ spring:
         show_sql: true
         format_sql: true
   jwt:
-    secret: valorsegredo
+    secret: teste
+    access:
+      name: access
+      valid: 3600000
+    refresh:
+      name: refresh
+      valid: 2592000000

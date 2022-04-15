@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  forum:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: rodrigo/forum
+    container_name: forum
+    networks:
+      - forum-network
+    tty: true
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  db:
+    image: mysql
+    command: --innodb-use-native-aio=0
+    container_name: db
+    restart: always
+    tty: true
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=forum
+      - MYSQL_ROOT_PASSWORD=forum2022
+    ports:
+      - "3306:3306"
+    networks:
+      - forum-network
+
+
+
+networks:
+  forum-network:
+    driver: bridge

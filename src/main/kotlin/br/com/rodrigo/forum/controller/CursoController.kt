@@ -20,7 +20,11 @@ import javax.validation.Valid
 
 @RestController
 @SecurityRequirement(name = "bearerAuth")
-@RequestMapping("/cursos", produces = ["application/json"], consumes = ["application/json"])
+@RequestMapping(
+    "/cursos",
+    produces = ["application/json"],
+    consumes = ["application/json"]
+)
 
 class CursoController(private val service: CursoService) {
 

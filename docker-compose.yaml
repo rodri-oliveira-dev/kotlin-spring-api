@@ -11,7 +11,7 @@ services:
       - forum-network
     tty: true
     ports:
-      - "8080:8080"
+      - "8030:8080"
     depends_on:
       - db
 

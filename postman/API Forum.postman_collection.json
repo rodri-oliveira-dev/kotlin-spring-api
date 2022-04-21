@@ -422,7 +422,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"Rodrigo de Oliveira\",\r\n    \"email\": \"rodrigodotnet@gmail.com\"\r\n}",
+							"raw": "{\r\n    \"nome\": \"Rodrigo de Oliveira\",\r\n    \"email\": \"rodrigodotnet@gmail.com\",\r\n    \"password\": \"Teste@2022\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
